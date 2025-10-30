@@ -25,6 +25,30 @@ export const searchCities = async (term) => {
   }
 };
 
-export const getWeatherByCity = (/* cityURL */) => {
-//   seu código aqui
+export const getWeatherByCity = async (cityURL) => {
+  const token = import.meta.env.VITE_TOKEN;
+
+  try {
+    const response = await fetch(
+      `http://api.weatherapi.com/v1/current.json?lang=pt&key=${token}&q=${cityURL}`,
+    );
+
+    if (!response.ok) {
+      throw new Error('Erro ao buscar clima da cidade');
+    }
+
+    const data = await response.json();
+
+    return {
+      temp: data.current.temp_c,
+      condition: data.current.condition.text,
+      icon: data.current.condition.icon,
+      country: data.location.country,
+      name: data.location.name,
+      url: cityURL,
+    };
+  } catch (error) {
+    console.error('Erro:', error);
+    window.alert('Erro ao buscar clima. Tente novamente mais tarde.');
+  }
 };
