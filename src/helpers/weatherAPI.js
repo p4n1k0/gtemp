@@ -52,3 +52,33 @@ export const getWeatherByCity = async (cityURL) => {
     window.alert('Erro ao buscar clima. Tente novamente mais tarde.');
   }
 };
+
+export const getForecastByCity = async (cityURL) => {
+  const token = import.meta.env.VITE_TOKEN;
+  const days = 7;
+
+  try {
+    const response = await fetch(
+      `http://api.weatherapi.com/v1/forecast.json?lang=pt&key=${token}&q=${cityURL}&days=${days}`,
+    );
+
+    if (!response.ok) {
+      throw new Error('Erro ao buscar previsão do tempo');
+    }
+
+    const data = await response.json();
+
+    const forecastList = data.forecast.forecastday;
+
+    return forecastList.map((day) => ({
+      date: day.date,
+      maxTemp: day.day.maxtemp_c,
+      minTemp: day.day.mintemp_c,
+      condition: day.day.condition.text,
+      icon: day.day.condition.icon,
+    }));
+  } catch (error) {
+    console.error('Erro:', error);
+    window.alert('Erro ao buscar previsão do tempo. Tente novamente mais tarte');
+  }
+};
