@@ -3,7 +3,7 @@ export const searchCities = async (term) => {
 
   try {
     const response = await fetch(
-      `http://api.weatherapi.com/v1/search.json?lang=pt&key=${token}&q=${encodeURIComponent(term)}`,
+      `https://api.weatherapi.com/v1/search.json?lang=pt&key=${token}&q=${encodeURIComponent(term)}`,
     );
 
     if (!response.ok) {
@@ -30,7 +30,7 @@ export const getWeatherByCity = async (cityURL) => {
 
   try {
     const response = await fetch(
-      `http://api.weatherapi.com/v1/current.json?lang=pt&key=${token}&q=${cityURL}`,
+      `https://api.weatherapi.com/v1/current.json?lang=pt&key=${token}&q=${cityURL}`,
     );
 
     if (!response.ok) {
@@ -59,7 +59,7 @@ export const getForecastByCity = async (cityURL) => {
 
   try {
     const response = await fetch(
-      `http://api.weatherapi.com/v1/forecast.json?lang=pt&key=${token}&q=${cityURL}&days=${days}`,
+      `https://api.weatherapi.com/v1/forecast.json?lang=pt&key=${token}&q=${cityURL}&days=${days}`,
     );
 
     if (!response.ok) {

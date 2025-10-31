@@ -5,6 +5,7 @@
   "scripts": {
     "start": "vite",
     "dev": "vite --open",
+    "build": "vite build",
     "cy": "cypress run",
     "cy:open": "cypress open --e2e --browser chrome",
     "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json . --ext .js",
